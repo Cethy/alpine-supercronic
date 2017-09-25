@@ -1,0 +1,3 @@
+# "do something" every minutes
+# * * * * * do something 2>&1
+# blank last line
