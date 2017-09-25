@@ -1,11 +1,12 @@
 FROM alpine:3.6
 
-# Add crontab file in the cron directory
+# Copy crontab file in the cron directory
 COPY ./crontab /etc/crontabs/crontab
-# Give execution rights on the cron job
-RUN chmod 0644 /etc/crontabs/crontab
-# Configure crontab
-RUN crontab /etc/crontabs/crontab
 
-# Run crond at container startup
-CMD ["crond", "-f"]
+# Copy start script
+COPY ./start.sh /app/start.sh
+# Ensure the start script is executable
+RUN chmod +x /app/start.sh
+
+# Configure crontab & run crond at container startup
+CMD ["sh", "/app/start.sh"]

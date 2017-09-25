@@ -7,10 +7,10 @@ Simple docker image based on alpine3.6.
 - configure crontab to run the new file
 - run `crond -f` at startup
 
-## How to use (needs confirmation)
+## How to use
 Create a Dockerfile which overrides the `/etc/crontabs/crontab` file :
 
-    FROM alpine-cron:latest
+    FROM cethy/alpine-cron:latest
     
     # Overrides crontab file
     COPY ./my-new-crontab /etc/crontabs/crontab
