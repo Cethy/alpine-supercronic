@@ -1,18 +1,34 @@
-Alpine-cron
+Alpine-supercronic
 ===
 
-Simple docker image based on alpine3.6. 
+Simple docker image based on alpine 3.6. 
 
-- copy crontab file
-- configure crontab to run the new file
-- run `crond -f` at startup
+Run [supercronic](https://github.com/aptible/supercronic).
 
 ## How to use
-Create a Dockerfile which overrides the `/etc/crontabs/crontab` file :
+### `docker run`
 
-    FROM cethy/alpine-cron:latest
+#### Default
+
+    docker run -ti -v <host/path/to/crontab>:/etc/crontabs cethy/alpine-cron:1.0
+
+The crontab file must be named `crontab`.
+
+#### Full configuration
+
+    docker run -ti -v <host/path/to/crontab>:<container/path/to/crontab> cethy/alpine-cron:1.0 <container/path/to/crontab><crontab_name>
+
+### Dockerfile inheritance
+Create a `Dockerfile` like this :
+
+    FROM cethy/alpine-cron:1.0
     
-    # Overrides crontab file
-    COPY ./my-new-crontab /etc/crontabs/crontab
-    # Re give execution rights on the cron job ?
-    RUN chmod 0644 /etc/crontabs/crontab
+    # Copy crontab file in the cron directory
+    COPY ./crontab /etc/crontab
+    RUN chmod 0644 /etc/crontab
+    
+    CMD ["/etc/crontab"]
+
+then :
+
+    docker build -t my_supercronic . && docker run my_supercronic
