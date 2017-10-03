@@ -10,18 +10,18 @@ Run [supercronic](https://github.com/aptible/supercronic).
 
 #### Default
 
-    docker run -ti -v <host/path/to/crontab>:/etc/crontabs cethy/alpine-cron:1.0
+    docker run -ti -v <host/path/to/crontab>:/etc/crontabs cethy/alpine-supercronic:v1.0
 
 The crontab file must be named `crontab`.
 
 #### Full configuration
 
-    docker run -ti -v <host/path/to/crontab>:<container/path/to/crontab> cethy/alpine-cron:1.0 <container/path/to/crontab><crontab_name>
+    docker run -ti -v <host/path/to/crontab>:<container/path/to/crontab> cethy/alpine-supercronic:v1.0 <container/path/to/crontab><crontab_name>
 
 ### Dockerfile inheritance
 Create a `Dockerfile` like this :
 
-    FROM cethy/alpine-cron:1.0
+    FROM cethy/alpine-supercronic:v1.0
     
     # Copy crontab file in the cron directory
     COPY ./crontab /etc/crontab
